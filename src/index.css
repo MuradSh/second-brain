@@ -1,8 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=KoHo:wght@300&display=swap');
 body {
+  background: #f3f3f3;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: KoHo, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +10,82 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+ /*
+ grey - #959595
+ cream - #e2e0d4
+soft-grey - #e8e8e8
+pure pink - #e7cac2
+off-pink -  #e6d2d2
+*/
+.sideBar{
+  position: fixed;
+  width: 20%;
+  background: #e8e8e8;
+  overflow-y: auto;
+  height: 100%;
+  max-width: 400px;
+  box-shadow: 1px 0px 6px #959595;
+  min-width: 200px;
+}
+.sideBarElement{
+  cursor: pointer;
+  height: 130px;
+  line-height: 130px;
+  font-size: 25px;
+  transition: .2s ease-out;
+  border-bottom: 1px solid darkgray;
+}
+.sideBarElement:last-of-type{
+  border-bottom: 0px;
+}
+.sideBarElement:hover{
+  background: #C8C8C8;
+  font-size: 30px;
+  height: 150px;
+  line-height: 150px;
+}
+.option{
+  margin-top: 50px;
+  display: inline-block;
+  background: #e6d2d2;
+  padding: 20px;
+  width: 120px;
+  letter-spacing: 1.1px;
+  font-size: 25px;
+  cursor: pointer;
+  transition: .3s;
+}
+.option:hover{
+  background: #e7cac2;
+  box-shadow: 3px 0px 5px darkgray;
+}
+.option:first-child:hover{
+  box-shadow: -5px 0px 5px gray;
+}
+.option:first-child{
+  border-right:1px solid #eeeeee;
+  margin-left: 20%;
+}
+
+.addTask{
+  margin-left: 20%;
+  margin-top: 50px;
+  width: 60%;
+  border: 0;
+  background: transparent;
+  font-size: 23px;
+  outline: none;
+  border-bottom: 2px solid #959595;
+  padding:5px;
+  color: #959595;
+  letter-spacing: 1.1px;
+  transition: 0.8s;
+}
+.addTask::placeholder,.addTask::-webkit-input-placeholder{
+  color: #959595;
+}
+.addTask:focus{
+  font-size: 25px;
+  border-bottom: 2px solid #e7cac2;
 }
