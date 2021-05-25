@@ -11,6 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+@-moz-keyframes fadeOut {
+    from {opacity:1;}
+    to {opacity:0;}
+}
+
+@-webkit-keyframes fadeOut {
+    from {opacity:1;}
+    to {opacity:0;}
+}
+
+@keyframes fadeOut {
+    from {opacity:1;}
+    to {opacity:0;}
+}
  /*
  grey - #959595
  cream - #e2e0d4
@@ -88,4 +102,29 @@ off-pink -  #e6d2d2
 .addTask:focus{
   font-size: 25px;
   border-bottom: 2px solid #e7cac2;
+}
+.task_list{
+  font-size: 20px;
+  text-align: left;
+  list-style: none;
+  display: inline-block;
+  margin-left: 20%;
+  width: 60%;
+  padding: 0;
+}
+.task_li{
+  margin-top: 20px;
+  padding: 10px;
+  border: 1px solid gray;
+  transition: .3s ease-in;
+  cursor: pointer;
+}
+.task_li:hover{
+  border-radius: 15px;
+  background: #d3dec5;
+}
+.removing{
+    -webkit-animation: fadeOut 200ms;
+    -moz-animation: fadeOut 200ms;
+    animation: fadeOut 200ms;
 }
