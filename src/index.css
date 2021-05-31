@@ -25,6 +25,16 @@ code {
     from {opacity:1;}
     to {opacity:0;}
 }
+@media (max-width: 1000px) {
+  .wrapper {
+    margin-left: 200px;
+  }
+}
+@media (min-width: 1000px) {
+  .wrapper {
+    margin-left: 25%;
+  }
+}
  /*
  grey - #959595
  cream - #e2e0d4
@@ -79,11 +89,9 @@ off-pink -  #e6d2d2
 }
 .option:first-child{
   border-right:1px solid #eeeeee;
-  margin-left: 20%;
 }
 
-.addTask{
-  margin-left: 20%;
+.textfield{
   margin-top: 50px;
   width: 60%;
   border: 0;
@@ -96,19 +104,21 @@ off-pink -  #e6d2d2
   letter-spacing: 1.1px;
   transition: 0.8s;
 }
-.addTask::placeholder,.addTask::-webkit-input-placeholder{
+.textfield::placeholder,.textfield::-webkit-input-placeholder{
   color: #959595;
 }
-.addTask:focus{
+.textfield:focus{
   font-size: 25px;
   border-bottom: 2px solid #e7cac2;
+}
+#addComment{
+  font-size: 20px !important;
 }
 .task_list{
   font-size: 20px;
   text-align: left;
   list-style: none;
   display: inline-block;
-  margin-left: 20%;
   width: 60%;
   padding: 0;
 }
@@ -127,4 +137,48 @@ off-pink -  #e6d2d2
     -webkit-animation: fadeOut 200ms;
     -moz-animation: fadeOut 200ms;
     animation: fadeOut 200ms;
+}
+.noteCard{
+  margin-top: 30px;
+  margin-left: 20px;
+  padding: 10px;
+  display: inline-block;
+  border: 2px solid red;
+  width: auto;
+  font-size: 25px;
+  max-width: 300px;
+  transition: .3s linear;
+  cursor: pointer;
+}
+.noteCard:hover{
+  background: #f5f5f5;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0px 0px 2px  gray;
+}
+.addNoteButton,.submitNoteButton,.addCommentButton{
+  margin-top: 20px;
+  background: transparent;
+  border: 1px solid gray;
+  color: #4e4e4e;
+  cursor: pointer;
+  font-size: 20px;
+  width: 40px;
+}
+.submitNoteButton{
+  width: auto;
+  padding: 5px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.addCommentButton{
+  border: 0;
+  cursor: pointer;
+  transition: .3s;
+  font-size: 30px;
+  position: relative;
+  top: 5px !important;
+}
+.addCommentButton:hover{
+  font-size: 35px;
 }

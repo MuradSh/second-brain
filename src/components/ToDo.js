@@ -1,14 +1,8 @@
 import React,{ useState, useEffect } from 'react'
 import axios from 'axios'
+import Textfield from './Textfield.js';
 
 const API_URL = 'http://localhost:80/react/db.php';
-
-const Inputs = (props) => {
-    return <input onKeyDown={props.onkeydown} type="text" placeholder="Add Task"  className="addTask" />
-}
-
-// ToDo:
-// improve todo and completed
 
 const Option = ({text,changePage,showing}) => {
 
@@ -49,7 +43,7 @@ const Tasks = ({newTasks,pageToShow}) => {
     <>
       <ul className="task_list" style={style}>
           {newTasks.map((value, index) => (
-              <li onClick={((e) => completed(value[0],e))} key={(value+""+index)}>{value}</li>
+              <li class="task_li" onClick={((e) => completed(value[0],e))} key={(value+""+index)}>{value}</li>
               ))
           }
           {tasks.map((value, index) => (
@@ -102,6 +96,7 @@ const ToDo = ({show}) => {
         axios.post(API_URL,{task: e.target.value})
         .then(res => {
             console.log(res.data);
+            e.target.value = ""
           })
           setNewTasks([...newTasks,e.target.value])
     }
@@ -112,7 +107,7 @@ const ToDo = ({show}) => {
     <Option changePage={()=> setPageToShow("To Do")} showing={pageToShow} text="To Do"/>
     <Option changePage={()=> setPageToShow("Completed")}  showing={pageToShow} text="Completed" />
     <br />
-    <Inputs onkeydown={monitorKeys}/>
+    <Textfield placeholder="Add Task" Id="addTask" onkeydown={monitorKeys}/>
     <Tasks  newTasks={newTasks} pageToShow={(pageToShow=="To Do") ? 0 : 1} />
     <Completed pageToShow={(pageToShow=="To Do") ? 0 : 1} />
     </div>
