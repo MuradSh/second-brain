@@ -3,11 +3,10 @@ import ToDo from './ToDo.js'
 import Notes from './Notes.js'
 import Journal from './Journal.js'
 import Books from './Books.js'
+import Calendar from './Calendar.js'
 import axios from 'axios'
 
 const Wrapper = ({page}) => {
-
-
   function renderSwitch(){
       if(window.location.hash!=""){
         page = window.location.hash.substr(1).replace("%20"," ")
@@ -24,6 +23,9 @@ const Wrapper = ({page}) => {
           break;
         case 'Books':
           return <Books />
+          break;
+        case 'Calendar':
+          return <Calendar />
           break;
         default:
           return <h1>not found</h1>

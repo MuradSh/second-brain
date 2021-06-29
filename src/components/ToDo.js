@@ -1,15 +1,10 @@
 import React,{ useState, useEffect } from 'react'
 import axios from 'axios'
 import Textfield from './Textfield.js';
+import Option from './Option.js';
 
 const API_URL = 'http://localhost:80/react/db.php';
 
-const Option = ({text,changePage,showing}) => {
-
-  return (
-    <div style={(text==showing) ? headingStyle : null} onClick={changePage} className="option">{text}</div>
-  )
-}
 
 const Tasks = ({newTasks,pageToShow}) => {
 
@@ -81,11 +76,6 @@ const Completed = ({pageToShow}) => {
   )
 }
 
-const headingStyle = {
-  background: '#e7cac2',
-  boxShadow: '3px 0px 5px darkgray'
-}
-
 
 const ToDo = ({show}) => {
 
@@ -104,12 +94,12 @@ const ToDo = ({show}) => {
 
   return (
     <div>
-    <Option changePage={()=> setPageToShow("To Do")} showing={pageToShow} text="To Do"/>
-    <Option changePage={()=> setPageToShow("Completed")}  showing={pageToShow} text="Completed" />
-    <br />
-    <Textfield placeholder="Add Task" Id="addTask" onkeydown={monitorKeys}/>
-    <Tasks  newTasks={newTasks} pageToShow={(pageToShow=="To Do") ? 0 : 1} />
-    <Completed pageToShow={(pageToShow=="To Do") ? 0 : 1} />
+      <Option changePage={()=> setPageToShow("To Do")} showing={pageToShow} text="To Do"/>
+      <Option changePage={()=> setPageToShow("Completed")}  showing={pageToShow} text="Completed" />
+      <br />
+      <Textfield placeholder="Add Task" Id="addTask" onkeydown={monitorKeys}/>
+      <Tasks  newTasks={newTasks} pageToShow={(pageToShow=="To Do") ? 0 : 1} />
+      <Completed pageToShow={(pageToShow=="To Do") ? 0 : 1} />
     </div>
   )
 }

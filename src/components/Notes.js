@@ -8,8 +8,7 @@ import {
   Link,
   useParams
 } from "react-router-dom";
-
-const API_URL = 'http://localhost:80/react/db.php';
+import {API_URL} from './API_URL.js';
 
 
 const Notes = () => {
@@ -85,7 +84,7 @@ const Notes = () => {
           <>
           <input type="button" value="←" onClick={() => (setReadCommentId(0))} className="addNoteButton" />
           <Switch>
-            <Route path="/:id" children={<ShowNote noteId="1" />}></Route>
+            <Route path="/:id" children={<ShowNote />}></Route>
           </Switch>
           </>
           }
@@ -96,7 +95,7 @@ const Notes = () => {
 
 export default Notes
 
-const ShowNote = ({noteId}) => {
+const ShowNote = () => {
   let { id } = useParams();
   const [comments,setComments] = useState('')
   useEffect(() => {

@@ -90,7 +90,7 @@ off-pink -  #e6d2d2
   border-right:1px solid #eeeeee;
 }
 
-.textfield{
+.textfield,#selectCollection{
   margin-top: 50px;
   width: 60%;
   border: 0;
@@ -102,6 +102,9 @@ off-pink -  #e6d2d2
   color: #959595;
   letter-spacing: 1.1px;
   transition: 0.8s;
+}
+#selectCollection{
+  cursor: pointer;
 }
 .textfield::placeholder,.textfield::-webkit-input-placeholder{
   color: #959595;
@@ -155,7 +158,7 @@ off-pink -  #e6d2d2
   padding: 30px;
   box-shadow: 0px 0px 2px  gray;
 }
-.addNoteButton,.submitNoteButton,.addCommentButton,.changeJournalPage{
+.addNoteButton,.submitNoteButton,.addCommentButton,.changeJournalPage,.addBookButton,.addCollectionButton{
   margin-top: 20px;
   background: transparent;
   border: 1px solid gray;
@@ -167,12 +170,17 @@ off-pink -  #e6d2d2
 .changeJournalPage{
   width: auto;
 }
-.submitNoteButton,.saveEntry{
+.addBookButton:hover,.addCollectionButton:hover{
+  box-shadow: 0px 0px 6px #959595;
+  font-size: 22px;
+}
+.submitNoteButton,.saveEntry,.addBookButton,.addCollectionButton{
   width: auto;
   padding: 5px;
   padding-left: 20px;
   padding-right: 20px;
   cursor: pointer;
+  transition: .3s ease-out;
 }
 .addCommentButton{
   border: 0;
@@ -230,4 +238,81 @@ a{
 }
 .noComment{
   font-size: 30px;
+}
+.book{
+  cursor: pointer;
+  border: 1px solid gray;
+  border-radius: 20px;
+  padding: 10px;
+  padding-left: 10%;
+  padding-right: 10%;
+  font-size: 25px;
+  margin: 20px;
+  max-width: 40%;
+  display: inline-block;
+  transition: .3s ease-out;
+}
+.book:hover{
+  box-shadow: 1px 0px 6px #959595;
+}
+.shelves{
+  width: 90%;
+  height: 90%;
+  margin: 20px;
+  overflow-y: auto;
+}
+.collection{
+  cursor: pointer;
+  width: 21%;
+  height: 100px;
+  padding: 10px;
+  font-size: 24px;
+  border: 1px solid gray;
+  display: inline-flex;
+  word-break: break-word;
+}
+.pinkHover:hover{
+  background: #Ede;
+}
+.blueHover:hover{
+  background: #dee;
+}
+.yellowHover:hover{
+  background: #Eed;
+}
+.collectionNames{
+  font-size: 17px;
+}
+.newColBookButton{
+  margin: 20px;
+}
+.collectionBooks{
+  border: 1px solid gray;
+  display: inline-block;
+  padding: 35px;
+  transition: 0.4s ease-in;
+  cursor: pointer;
+  border-radius: 60% 43%;
+  font-size: 25px;
+  margin: 30px;
+}
+.collectionBooks:hover{
+  border-radius: 43% 60%;
+  box-shadow: 1px 0px 6px #959595;
+}
+.heading{
+  display: flex;
+  justify-content: space-between;
+}
+.monthName,.arrows{
+  margin: 30px;
+  font-size: 60px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.4s;
+}
+.arrows:hover{
+  color: #555;
+}
+.days{
 }
