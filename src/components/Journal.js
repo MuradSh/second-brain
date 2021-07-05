@@ -1,5 +1,6 @@
 import React,{ useState, useEffect } from 'react'
 import axios from 'axios'
+import Textfield from './Textfield.js';
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,48 +19,81 @@ const Journal = () => {
   const [entries,setEntries] = useState([]);
   const [readingEntryId, setReadingEntryId] = useState(0);
   const [entry,setEntry] = useState();
+  const [passCheck,setPassCheck] = useState(false);
+  const [enteredPass,setEnteredPass] = useState("a");
+
+
+
   useEffect(() => {
-    axios.post(API_URL,{"getEntries": 1})
+    axios.post(API_URL,{"getEntries": 1,"pass":enteredPass})
     .then(res => {
         setEntries(res.data)
       })
-  },[])
+  }, [enteredPass])
 
   function submitEntry(){
     var entryAPI = document.getElementById("journalTA").value;
-    axios.post(API_URL,{"addEntry": entryAPI})
+    axios.post(API_URL,{"addEntry": entryAPI,"pass":enteredPass})
     .then(res => {
         console.log(res.data)
       })
   }
 
-  return (
-    <Router>
-      <input type="button" value={(showWrite ? "Change to Read" : "Change to Write")} onClick={()=> {setReadingEntryId(0); setShowWrite(!showWrite)}} className="changeJournalPage" />
-      <br/>
-      { readingEntryId ==0 ?
-        showWrite ?
-          <>
-            <textarea placeholder="Entry" id="journalTA" className="journalTextArea"></textarea>
-            <input onClick={submitEntry} type="button" value="Save" className="saveEntry" />
-          </>
-          :
-          <>
-            { Object.keys(entries).map((entry,index) => {
-              return <Link to={entry} key={index}><div onClick={() => {setReadingEntryId(entry); setEntry(entries[entry][1])}} className="journalEntry">
-                <span>{entries[entry][0]}</span>
-              </div>
-            </Link>
-            })}
-          </>
+  function monitorKeys(e){
+    if(e.keyCode==13){
+        console.log(e.target.value)
+        axios.post(API_URL,{"passwordJournal": e.target.value})
+        .then(res => {
+            if (res.data===1) {
+              setEnteredPass(e.target.value);
+              setPassCheck(true);
+              // setTimeout(function(){ fetchEntries() }, 1000);
+            }else{
+              alert("WRONG!");
+            }
+          })
+    }
+  }
 
-      :
-      <Switch>
-          <Route path="/:id" children={<ShowEntry entry={entry} />}></Route>
-      </Switch>
-      }
-    </Router>
-  )
+  if(passCheck){
+    return (
+      <Router>
+        <input type="button" value={(showWrite ? "Change to Read" : "Change to Write")} onClick={()=> {setReadingEntryId(0); setShowWrite(!showWrite)}} className="changeJournalPage" />
+        <br/>
+        { readingEntryId ==0 ?
+          showWrite ?
+            <>
+              <textarea placeholder="Entry" id="journalTA" className="journalTextArea"></textarea>
+              <input onClick={submitEntry} type="button" value="Save" className="saveEntry" />
+            </>
+            :
+            <>
+              { Object.keys(entries).map((entry,index) => {
+                return <Link to={entry} key={index}><div onClick={() => {setReadingEntryId(entry); setEntry(entries[entry][1])}} className="journalEntry">
+                  <span>{entries[entry][0]}</span>
+                </div>
+              </Link>
+              })}
+            </>
+
+        :
+        <Switch>
+            <Route path="/:id" children={<ShowEntry entry={entry} />}></Route>
+        </Switch>
+        }
+      </Router>
+    )
+  }else{
+    return (
+      <div className="passwordWrap">
+        <h1>
+          Please enter password
+        </h1>
+        <Textfield placeholder="Password" Id="addNote" type="password" onkeydown={monitorKeys} />
+        <br />
+      </div>
+    )
+  }
 }
 
 export default Journal

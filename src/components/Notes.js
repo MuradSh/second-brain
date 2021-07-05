@@ -21,11 +21,11 @@ const Notes = () => {
   const [readCommentId,setReadCommentId] = useState(0)
 
   useEffect(() => {
-        axios.post(API_URL,{getNotes: ""})
-        .then(res => {
-            // reverse the assign, because it sorts by ID ASC instead of desc
-            setNotes(Object.values(Object.assign([], res.data).reverse()))
-          })
+      axios.post(API_URL,{getNotes: ""})
+      .then(res => {
+          // reverse the assign, because it sorts by ID ASC instead of desc
+          setNotes(Object.values(Object.assign([], res.data).reverse()))
+        })
   },[]);
 
 
