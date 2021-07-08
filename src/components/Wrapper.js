@@ -4,6 +4,7 @@ import Notes from './Notes.js'
 import Journal from './Journal.js'
 import Books from './Books.js'
 import Calendar from './Calendar.js'
+import Movies from './Movies.js'
 import {Day} from './Calendar.js'
 import axios from 'axios'
 import {
@@ -46,6 +47,9 @@ const Wrapped = ({page}) => {
           break;
         case 'Calendar':
           return <Calendar />
+          break;
+        case 'Movies':
+          return <Movies />
           break;
         default:
           return <h1>not found</h1>
