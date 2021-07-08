@@ -322,32 +322,35 @@ a{
 .arrows:hover{
   color: #555;
 }
-.calendarDay{
-}
 .passwordWrap{
   display: inline-block;
 }
 .calendarDay{
-  font-size: 23px;
+  font-size: 20px;
+  overflow-y: auto;
+  height: 200px;
   margin: 5px;
   border: 1px solid gray;
-  padding: 5px 90px 50px 8px;
   width: 50px;
-  display: inline-block;
+  display: inline-table;
   cursor: pointer;
   text-align: left;
 }
 .calendarActivities{
-  padding: 15px;
-  font-size: 20px;
+  padding: 10px;
+  margin-left: 10px;
+  font-size: 19px;
+  padding-left: 20px;
+}
+.calendarActivities>li::marker{
+  color: red;
+  padding-left: 10px;
 }
 .calendarDay>.dayClick{
-  border-radius: 50%;
-  width: 30px;
-  text-align: center;
-}
-.calendarDay>.dayClick:hover{
-  background: #DDD;
+  display: inline-block;
+  font-size: 17px;
+  padding: 5px 90px 0px 8px;
+  width: 100%;
 }
 .dayCellHead{
   display: flex;
@@ -390,5 +393,4 @@ input[type="time"]::-webkit-calendar-picker-indicator  {
 }
 .eventsTodayList{
   font-size: 23px;
-
 }

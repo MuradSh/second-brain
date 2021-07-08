@@ -23,10 +23,20 @@ class Calendar extends Component {
       month: month,
       monthName: monthName,
       daysInMonth: 0,
-      readingDay: 0
+      readingDay: 0,
+      eventsForMonth: []
     }
     this.mL =  ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     this.mS =  ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+    var weekday = new Array(7);
+    weekday[0] = "Sunday";
+    weekday[1] = "Monday";
+    weekday[2] = "Tuesday";
+    weekday[3] = "Wednesday";
+    weekday[4] = "Thursday";
+    weekday[5] = "Friday";
+    weekday[6] = "Saturday";
+    this.weekday = weekday
   }
 
   getDaysInMonth = (year,m) => {
@@ -57,6 +67,19 @@ class Calendar extends Component {
     })
   }
 
+  componentDidMount(){
+    axios.post(API_URL,{eventsForMonth: this.state.month})
+      .then(res => {
+          this.setState((state) => {
+            return {
+              eventsForMonth: res.data
+            }
+          })
+          console.log(res.data)
+    })
+  }
+
+
   goBack(){
     var a=1;
     var d = new Date()
@@ -74,6 +97,14 @@ class Calendar extends Component {
           monthName: this.mL[month],
           daysInMonth: days
       }
+    })
+    axios.post(API_URL,{eventsForMonth: this.state.month-1})
+      .then(res => {
+          this.setState((state) => {
+            return {
+              eventsForMonth: res.data
+            }
+          })
     })
   }
 
@@ -96,10 +127,17 @@ class Calendar extends Component {
           daysInMonth: days
       }
     })
+    axios.post(API_URL,{eventsForMonth: this.state.month+1})
+      .then(res => {
+          this.setState((state) => {
+            return {
+              eventsForMonth: res.data
+            }
+            console.log(res.data);
+          })
+    })
   }
-  dayClicked(e){
 
-  }
   render() {
     return (
       <Router>
@@ -116,12 +154,20 @@ class Calendar extends Component {
               <div className="days ">
                 {
                   this.state.daysInMonth.map((index, elem) => {
+                      var d  = new Date(this.state.year,this.state.month, elem+1)
+                      var dayOfTheWeek = d.getDay()
                       return <Link onClick={() => this.setState(({readingDay:elem+1}))}to={"/"+this.state.year+"/"+(this.state.month+1)+"/"+(elem+1)} key={index}>
                         <div className="calendarDay">
-                        <div className="dayClick">{elem+1}</div>
-                        <ul className="calendarActivities">
-                          <li>eat lunch</li>
-                        </ul>
+                          <span className="dayClick">{(elem+1)+"    "+this.weekday[dayOfTheWeek]}</span>
+                          <ul className="calendarActivities">
+                            {
+                              (elem+1).toString() in this.state.eventsForMonth
+                              &&
+                              this.state.eventsForMonth[(elem+1).toString()].map((item, ind) => {
+                                return <li key={ind}>{item[0]+" at "+item[1]}</li>
+                              })
+                            }
+                          </ul>
                       </div></Link>
                   })
                 }
@@ -153,12 +199,10 @@ const Day = ({onBackClick}) => {
     axios.post(API_URL,{memoryDayInfo: day+","+month+","+year})
     .then(res => {
         setMemories(res.data); // books, events, entries, notes
-        console.log(res.data);
       })
     axios.post(API_URL,{dayInfo: day+","+month+","+year})
       .then(res => {
           setEventsToday(res.data);
-          console.log(res.data);
         })
   },[])
   if (onBackClick===undefined) {
@@ -169,7 +213,7 @@ const Day = ({onBackClick}) => {
   function addEvent(e){
     var v = document.getElementById("addTaskDay").value;
     var time = document.getElementById("eventDate").value;
-    axios.post(API_URL,{addEvent:v,time:time})
+    axios.post(API_URL,{addEvent:v,time:time, dateEvent: year+"-"+month+"-"+day})
       .then(res => {
           console.log(res.data);
         })
