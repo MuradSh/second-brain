@@ -28,6 +28,9 @@ const Notes = () => {
         })
   },[]);
 
+  function changeCommentId(){
+    window.location = "/home#Notes"
+  }
 
   function togglePage(){
     setShowPage((showPage=="Notes") ? "Add" : "Notes")
@@ -40,10 +43,11 @@ const Notes = () => {
     setComments(comment)
   }
 
-  function addTask(){
+  function addNote(){
     axios.post(API_URL,{addNote: document.getElementById("addNote").value, comments: comments})
     .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
+        alert("Success")
       }
     )
   }
@@ -59,32 +63,31 @@ const Notes = () => {
                  showPage=="Notes" ?
               <>
                 {notes.map((note,index) => {
-                  return <Link to={note[1]} key={index} onClick={() => (setReadCommentId(note[1]))} ><div className="noteCard" style={{borderColor:borderColors[Math.floor(Math.random() * borderColors.length)]}}>
+                  return <Link to={"/note/"+note[1]} key={index} onClick={() => (setReadCommentId(note[1]))} ><div className="noteCard" style={{borderColor:borderColors[Math.floor(Math.random() * borderColors.length)]}}>
                     <span>{note[0]}</span>
                   </div></Link>
                 })}
               </>
               :
               <>
-                <Textfield placeholder="Add Note" Id="addNote" />
+                <Textfield placeholder="Add Note" id="addNote" />
                 <br />
                 { comments.map((comment,index) => {
                   return <div key={index}>
                   {index==comments.length-1 && <input type="button" value="+" onClick={()=>{setComments([...comments,""])}} className="addCommentButton"/>}
-                  <Textfield key={index} number={index} onblur={monitorCommentsInput} placeholder="Add Comment" Id="addComment" />
+                  <Textfield key={index} data-number={index} onBlur={monitorCommentsInput} placeholder="Add Comment" id="addComment" />
                   </div>
                 })
                 }
                 <br />
-                <input type="button" onClick={addTask} value="Add" className="submitNoteButton"/>
+                <input type="button" onClick={addNote} value="Add" className="submitNoteButton"/>
               </>
               }
             </div>
           :
           <>
-          <input type="button" value="←" onClick={() => (setReadCommentId(0))} className="addNoteButton" />
           <Switch>
-            <Route path="/:id" children={<ShowNote />}></Route>
+            <Route path="/note/:id" children={<ShowNote onclick={changeCommentId} />}></Route>
           </Switch>
           </>
           }
@@ -95,8 +98,9 @@ const Notes = () => {
 
 export default Notes
 
-const ShowNote = () => {
+export const ShowNote = ({ onclick }) => {
   let { id } = useParams();
+  const [newComments, setNewComments] = useState(['']);
   const [comments,setComments] = useState('')
   useEffect(() => {
         axios.post(API_URL,{getComments: id})
@@ -106,16 +110,46 @@ const ShowNote = () => {
           })
   },[]);
 
+  function addNewComment(){
+    setNewComments([...newComments,''])
+  }
+
+  function submitComments(e){
+    let coms = [];
+    let textfields = document.getElementById("newCommentWrap").children;
+    for (var i = 0; i < newComments.length; i++) {
+      coms[i] = textfields[i].value
+    }
+    axios.post(API_URL,{newCommentForNote:id,newComments: coms})
+    .then(res => {
+        console.log(res.data)
+      })
+  }
   return (
-    <div>{
+    <div>
+      <input type="button" value="←" onClick={onclick} className="addNoteButton" />
+      <br />
+      {
         (typeof comments=="string") ?
         <span className="noComment">{comments}</span>
         :
           comments.map((comment,index) => {
-            return <div className="noteCard">
+            return <div  key={index} className="noteCard">
               <span>{comment}</span>
             </div>
           })
-      }</div>
+      }
+      <br />
+      <div id="newCommentWrap">
+          {
+            newComments.map((item, index) => {
+              return <Textfield key={index} alpha-index={index} placeholder="Add Comment" id="newCommentNotes"/>
+            })
+          }
+      </div>
+      <br />
+      <input type="button" value="+" onClick={addNewComment} className="addCommentNote" />
+      <input type="button" value="Submit" onClick={submitComments} className="submitComments" />
+    </div>
   )
 }

@@ -80,8 +80,8 @@ const Books = () => {
                         })
                         :
                         <div className="addBook">
-                          <Textfield placeholder="Book Name" Id="bookName" />
-                          <Textfield placeholder="Author" Id="bookAuthor" />
+                          <Textfield placeholder="Book Name" id="bookName" />
+                          <Textfield placeholder="Author" id="bookAuthor" />
                           <br />
                           <select id="selectCollection">
                               <option alpha-id="0">Select Collection</option>
@@ -93,7 +93,7 @@ const Books = () => {
                               }
                           </select>
                           <br />
-                          {newCol && <><Textfield placeholder="Collection Name" Id="newCollectionName" /><br /></>}
+                          {newCol && <><Textfield placeholder="Collection Name" id="newCollectionName" /><br /></>}
                           <input type="button" value={!newCol ? "New Collection" : "Remove"} onClick={() => {setNewCol(!newCol)}} className="newColBookButton" />
                           <br />
                           <input type="button" value="Submit" onClick={addBook} className="addBookButton" />
@@ -119,7 +119,7 @@ const Books = () => {
                         </div>
                           :
                           <div className="addCollection">
-                            <Textfield placeholder="Collection Name" Id="collectionName" />
+                            <Textfield placeholder="Collection Name" id="collectionName" />
                             <br/>
                             <input type="button" value="Submit" onClick={addCollection} className="addCollectionButton" />
                           </div>

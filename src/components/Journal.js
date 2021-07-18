@@ -33,15 +33,20 @@ const Journal = () => {
 
   function submitEntry(){
     var entryAPI = document.getElementById("journalTA").value;
-    axios.post(API_URL,{"addEntry": entryAPI,"pass":enteredPass})
+    var entryTitle = document.getElementById("entryTitle").value;
+    axios.post(API_URL,{"addEntry": entryAPI,"entryTitle":entryTitle,"pass":enteredPass})
     .then(res => {
-        console.log(res.data)
+        if(res.data.length==0){
+          document.getElementById("journalTA").value = ""
+        }else{
+          alert(res.data)
+        }
+
       })
   }
 
   function monitorKeys(e){
     if(e.keyCode==13){
-        console.log(e.target.value)
         axios.post(API_URL,{"passwordJournal": e.target.value})
         .then(res => {
             if (res.data===1) {
@@ -63,6 +68,8 @@ const Journal = () => {
         { readingEntryId ==0 ?
           showWrite ?
             <>
+              <Textfield placeholder="Title" id="entryTitle" />
+              <p />
               <textarea placeholder="Entry" id="journalTA" className="journalTextArea"></textarea>
               <input onClick={submitEntry} type="button" value="Save" className="saveEntry" />
             </>
@@ -89,7 +96,7 @@ const Journal = () => {
         <h1>
           Please enter password
         </h1>
-        <Textfield placeholder="Password" Id="addNote" type="password" onkeydown={monitorKeys} />
+        <Textfield placeholder="Password" id="addNote" type="password" onKeyDown={monitorKeys} />
         <br />
       </div>
     )

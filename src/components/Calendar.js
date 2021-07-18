@@ -222,7 +222,7 @@ const Day = ({onBackClick}) => {
   return (
     <div className="dayWrap">
          <input type="button" value="←" onClick={onBackClick} className="backCalendar" /> <br />
-         <Textfield placeholder="Add Task" Id="addTaskDay"/>
+         <Textfield placeholder="Add Task" id="addTaskDay"/>
          <br />
          <input type="time" id="eventDate" />
          <br />
@@ -245,6 +245,9 @@ const Day = ({onBackClick}) => {
                     });
                   }else if(index==2){
                     return item.map((item2, i) => {
+                      if (item2[1]!="") {
+                        return <li key={i}>{item2[1].substr(0,4)+" you wrote entry "+item2[1]}</li>
+                      }
                       return <li key={i}>{item2[1].substr(0,4)+" you wrote entry id="+item2[0]}</li>
                     });
                   }else if(index==3){

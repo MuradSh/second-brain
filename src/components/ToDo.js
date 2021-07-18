@@ -97,7 +97,7 @@ const ToDo = ({show}) => {
       <Option changePage={()=> setPageToShow("To Do")} showing={pageToShow} text="To Do"/>
       <Option changePage={()=> setPageToShow("Completed")}  showing={pageToShow} text="Completed" />
       <br />
-      <Textfield placeholder="Add Task" Id="addTask" onkeydown={monitorKeys}/>
+      <Textfield placeholder="Add Task" id="addTask" onKeyDown={monitorKeys}/>
       <Tasks  newTasks={newTasks} pageToShow={(pageToShow=="To Do") ? 0 : 1} />
       <Completed pageToShow={(pageToShow=="To Do") ? 0 : 1} />
     </div>

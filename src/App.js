@@ -10,12 +10,13 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import config from './config.js'
 
-// TODO: onclick note show comments
+const LOGIN_PASS = config.PASSWORD
+
+// TODO: improve login security(database API)
 // TODO: ability to hide
 // TODO: improve todo and completed
-// TODO: add comment on note click on notes page
-// TODO: fix calendar url not swithcing
 
 
 function App() {
@@ -23,9 +24,15 @@ function App() {
   const [page,setPage] = useState("To Do")
 
   function changePage(pageName){
-    window.location = "/#"+pageName
-    // window.location.hash = pageName
-    setPage(pageName);
+
+    var c = JSON.parse(window.localStorage.getItem("pass"));
+    if (LOGIN_PASS!=c.pass) {
+      window.location = "/"
+    }else{
+      window.location = "/home#"+pageName
+      // window.location.hash = pageName
+      setPage(pageName);
+    }
   }
 
   return (
