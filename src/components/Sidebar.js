@@ -24,7 +24,7 @@ export default class Sidebar extends Component {
       <div className="sideBar">
         {
           this.state.sideBarElements.map((value,index)=>{
-            return <div onClick={(e) => {this.props.onChange(value); this.highlight(e)}} className="sideBarElement" key={value}>{value}</div>
+            return <div onClick={e => {this.props.onChange(value); this.highlight(e)}} className="sideBarElement" key={value}>{value}</div>
           })
         }
       </div>

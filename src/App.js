@@ -15,7 +15,6 @@ import config from './config.js'
 const LOGIN_PASS = config.PASSWORD
 
 // TODO: improve login security(database API)
-// TODO: ability to hide
 // TODO: improve todo and completed
 
 

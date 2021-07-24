@@ -212,7 +212,7 @@ off-pink -  #e6d2d2
   box-shadow: 0px 0px 5px gray;
   height: 600px;
 }
-.saveEntry,.addCommentNote,.submitComments{
+.saveEntry,.addCommentNote,.submitComments,.movieName{
   font-size: 25px;
 }
 .saveEntry{
@@ -407,21 +407,6 @@ input[type="time"]::-webkit-calendar-picker-indicator  {
   display: block;
   font-family: 'Montserrat';
 }
-.worldIcon{
-  transition: 0.3s ease-out;
-  border: 1px solid gray;
-  display: inline-block;
-  height: 35px;
-  padding-top: 10px;
-  width: 50px;
-  cursor: pointer;
-  margin-left: 10px;
-  margin-left: 10px;
-}
-.worldIcon:hover{
-    border-radius: 50% 40%;
-    box-shadow: 0px 0px 5px gray;
-}
 .addCommentNote,.submitComments{
   margin-left: 10px;
 }
@@ -433,4 +418,29 @@ input[type="time"]::-webkit-calendar-picker-indicator  {
 }
 #entryTitle{
   margin-top: 20px;
+}
+.movieSearchResults{
+  display: inline-block;
+  margin: 25px;
+  cursor: pointer;
+}
+.movieSearchResults>img,.moviesToWatch>img{
+  height: 400px;
+  filter: brightness(70%);
+  transition: .3s ease-out;
+}
+.movieSearchResults>img:hover,.moviesToWatch>img:hover{
+  border-radius: 25px;
+  box-shadow: 0px 0px 30px gray;
+  filter:drop-shadow(8px 8px 10px gray) brightness(100%);
+}
+.starIcon{
+  position: absolute;
+  margin-top: -2px;
+}
+.moviesToWatch{
+  cursor: pointer;
+  display: inline-block;
+  font-size: 23px;
+  margin: 20px;
 }
